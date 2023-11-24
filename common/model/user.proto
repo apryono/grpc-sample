@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package model;
+
+option go_package = "./common/pb";
+
+/* 
+    Model didefinisikan menggunakan keyword message diikuti dengan nama model-nya. 
+    Di dalam kurung kurawal, ditulis property-property model 
+    dengan skema penulisan <tipe data> <nama property> = <numbered field>.
+*/
+
+enum UserGender {
+    UNDEFINDE = 0;
+    MALE = 1;
+    FEMALE = 2;
+}
+
+/*
+    Bisa dilihat bahwa di tiap field terdapat unique number. 
+    Informasi ini berguna untuk versioning model protobuf. 
+    Tiap field harus memiliki angka yang unik satu sama lain dalam satu "message".
+*/
+
+message User {
+    string id = 1;
+    string name = 2;
+    string password = 3;
+    UserGender gender = 4;
+}
+
+message UserList {
+    repeated User list = 1;
+}
+
+/*
+    Di dalam User, dideklarasikan property "id", "name", dan "password" yang bertipe "string"; dan juga property "gender" yang bertipe "enum UserGender".
+    Selain User, model UserList juga didefinisikan. Isinya hanya satu property yaitu list yang tipe-nya adalah User. 
+    Keyword repeated pada property digunakan untuk pendefinisian tipe array atau slice. 
+    Statement "repeated User" adalah ekuivalen dengan "[]*User" (tipe element slice pasti pointer).
+*/
+        

@@ -1,0 +1,18 @@
+File .proto sudah siap, sekarang saatnya untuk meng-compile file-file tersebut agar menjadi .go. 
+Kompilasi dilakukan lewat command protoc. Agar output berupa file Go, maka gunakan flag --go_out. 
+
+Lebih jelasnya silakan ikut command berikut.
+
+Generate Protobuf [ From file ext .proto ] : return file filename_pb.go
+
+protoc --go_out=. location_proto_file
+
+```
+
+protoc --go_out=. .\common\pb\*.proto
+
+```
+disini hasil generate akan di buat di folder pb, return file baru dengan ekstensi .pb.go muncul.
+
+NOTES :
+Jika terjadi error saat generate pada package nya, jangan lupa untuk ``` go mod tidy ``` untuk mendapatkan library tersebut.

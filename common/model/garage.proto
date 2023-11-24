@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package model;
+
+option go_package = "./common/pb"; // lokasi hasil file yang akan di generate
+
+/*
+    Bisa dilihat, property "coordinate" pada model "Garage" tipe-nya adalah model juga, yaitu "GarageCoordinate".
+
+    Di bawah, tipe data float digunakan pada pendefinisian property "latitude" dan "longitude". 
+    Silakan merujuk ke link berikut untuk mengetahui tipe-tipe primitif apa saja yang bisa digunakan sebagai tipe data property model https://developers.google.com/protocol-buffers/docs/proto3#scalar.
+*/
+
+message GarageCoordinate {
+    float latitude = 1;
+    float longitude = 2;
+}
+
+message Garage {
+    string id = 1;
+    string name = 2;
+    GarageCoordinate coordinate = 3;
+}
+
+message GarageList {
+    repeated Garage list = 1;
+}
+
+message GarageListByUser {
+    map<string, GarageList> list = 1;
+}
+
+/*
+    Selain array/slice, tipe map juga bisa digunakan pada protobuf. 
+    Gunakan keyword map untuk mendefinisikan tipe map. Penulisannya disertai dengan penulisan tipe data key dan tipe data value map tersebut.
+
+    Penulisan tipe data map mirip seperti penulisan HashMap pada java yang disisipkan juga tipe generics-nya.
+*/
