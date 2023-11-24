@@ -36,3 +36,27 @@ message GarageListByUser {
 
     Penulisan tipe data map mirip seperti penulisan HashMap pada java yang disisipkan juga tipe generics-nya.
 */
+
+import "google/protobuf/Empty.proto";
+
+message GarageUserId {
+    string user_id = 1;
+}
+
+message GarageAndUserId {
+    string user_id = 1;
+    Garage garage = 2;
+}
+
+service Garages {
+    rpc Add(GarageAndUserId) returns (google.protobuf.Empty) {}
+    rpc List(GarageUserId) returns (GarageList) {}
+}
+
+/*
+
+    Perlu diketahui bahwa protobuf mewajibkan pada rpc method untuk tidak menggunakan tipe primitif sebagai tipe argument maupun tipe nilai balik. 
+    Tipe string pada rpc List(string) akan menghasilkan error saat di-compile. 
+    Dan juga protobuf mewajibkan method untuk hanya menerima satu buah parameter, maka jelasnya rpc Add(string, Garage) juga invalid.
+
+*/

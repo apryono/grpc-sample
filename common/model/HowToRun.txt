@@ -16,3 +16,15 @@ disini hasil generate akan di buat di folder pb, return file baru dengan ekstens
 
 NOTES :
 Jika terjadi error saat generate pada package nya, jangan lupa untuk ``` go mod tidy ``` untuk mendapatkan library tersebut.
+
+Kompilasi File .proto Dengan Enable Plugin grpc
+
+Gunakan command berikut untuk generate file .go dari file .proto yang sudah kita buat:
+
+Generate GRPC Protobuf :  return file filename_grpc.pb.go
+
+protoc --go-grpc_out=. --plugin=go-grpc location_proto_file
+
+```
+protoc --go-grpc_out=. --plugin=go-grpc ./common/pb/*.proto
+```

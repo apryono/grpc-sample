@@ -39,4 +39,29 @@ message UserList {
     Keyword repeated pada property digunakan untuk pendefinisian tipe array atau slice. 
     Statement "repeated User" adalah ekuivalen dengan "[]*User" (tipe element slice pasti pointer).
 */
-        
+
+
+import "google/protobuf/Empty.proto";
+
+service Users {
+    rpc Register(User) returns (google.protobuf.Empty) {}
+    rpc List(google.protobuf.Empty) returns (UserList) {}
+}
+
+/*
+Sebuah service bernama Users didefinisikan, dengan isi dua buah method.
+
+    Register(), menerima parameter bertipe model User, dan mengembalikan google.protobuf.Empty.
+    List(), menerima parameter bertipe google.protobuf.Empty, dan mengembalikan tipe UserList.
+
+    Pada method Register() sebenarnya kita tidak butuh nilai balik. Tapi karena requirements dari protobuf mewajibkan semua rpc method harus memiliki nilai balik, 
+    maka kita gunakan model Empty milik google protobuf.
+
+    Cara penggunaan model Empty adalah dengan meng-import file proto-nya terlebih dahulu, google/protobuf/Empty.proto, lalu menggunakan google.protobuf.Empty sebagai model.
+
+    Juga, pada method List(), sebenarnya argument tidak dibutuhkan, 
+    tapi karena protobuf mewajibkan pendefinisian rpc method untuk memiliki satu buah argument dan satu buah return type, maka mau tidak mau harus ada argument.
+    
+*/
+
+// Setelah di-compile, dua buah interface terbuat dengan skema nama <interfacename>Server dan <interfacename>Client. Karena nama service adalah Users, maka terbuatlah UsersServer dan UsersClient.
